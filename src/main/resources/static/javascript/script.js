@@ -1,4 +1,7 @@
+import {sequentialSearch, binarySearch} from './algorithms/searching.js';
+
 let arraySizeValue;
+let toFind;
 const arraySize = document.querySelector('#sorting-size-input');
 arraySize.addEventListener('change', event =>{
     arraySizeValue = event.target.value
@@ -6,13 +9,13 @@ arraySize.addEventListener('change', event =>{
 });
 
 function generateArray(){
-    const toFind = Math.floor(Math.random() * arraySizeValue)
+    toFind = Math.floor(Math.random() * arraySizeValue)
     const array = document.querySelector('.array');
     for(let i=0; i<arraySizeValue;i++){
         if(i == toFind){
             array.innerHTML += '<div class="box green"></div>';
         }else{
-            array.innerHTML += '<div class="box"></div>';
+            array.innerHTML += '<div class="box" id="box-'+i+'"></div>';
         }
     }
 }
@@ -31,5 +34,20 @@ newArray.addEventListener('click', event =>{
         eraseArray();
         generateArray();
     }
-})
+});
 
+const form = document.querySelector('#searching-form');
+form.addEventListener('submit', event => {
+    event.preventDefault();
+    const lengthInput = document.querySelector('#sorting-size-input');
+    const algTypeInput = document.querySelector('#searching-alg');
+    const  length = lengthInput.value.trim();
+    const algType = algTypeInput.value;
+    if(algType !== '' && length !== ''){
+      if(algType == 'sequential'){
+        sequentialSearch(toFind, length);
+      }else if(algType == 'binary'){
+          binarySearch(toFind, length);
+      }
+    }
+});
