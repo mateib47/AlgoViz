@@ -2,7 +2,7 @@ html{
     scroll-behavior: smooth;
 }
 body{
-    background-color: #27CDF2;
+    background-color:#3AC9D9;
     margin: 0;
     text-align: center;
     font-size: 20px;
@@ -11,7 +11,7 @@ nav {
     position: fixed;
     max-width: 100%;
     width:100%;
-    background-color: #F24472;
+    background-color: #0F6A8B;
     display: flex;
     flex-direction: row;
     justify-content: space-between;
@@ -77,6 +77,8 @@ button{
     height: 20px;
     width: 20px;
     margin-right: 10px;
+    transition:1s;
+    transition-timing-function: ease-out;
 }
 .array{
     display: flex;
@@ -86,4 +88,7 @@ button{
 }
 .green{
     background-color: #436E73;
+}
+#prompt{
+    display: none;
 }

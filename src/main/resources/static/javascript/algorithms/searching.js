@@ -1,6 +1,7 @@
 function sequentialSearch(toFind, length){
     for(let i = 0; i<length; i++){
         if(i == toFind){
+            elementFound(toFind);
             break;
         }else{
             task(i);
@@ -11,39 +12,43 @@ function sequentialSearch(toFind, length){
 function task(i) {
     setTimeout(function() {
         fadeOut(document.querySelector('#box-'+i));
-    }, 500 * i);
+    }, 300 * i);
 }
 
-function green(i) {
-    document.querySelector('#box-'+i).style.backgroundColor = 'green';
+function green(i, d) {
+    setTimeout(function() {
+        document.querySelector('#box-'+i).style.backgroundColor = '#F2EB8D';
+    }, 300*d);
 }
-function red(i) {
-    document.querySelector('#box-'+i).style.backgroundColor = 'red';
+function red(i, d) {
+    setTimeout(function() {
+        document.querySelector('#box-'+i).style.backgroundColor = '#F2B05E';
+    }, 300*d);
+
 }
 
 function binarySearch(toFind, length){//make it recursive
-    let l = 0, r = length-1;
+    let l = 0, r = length-1, depth = 0;
     while(l<=r){
+        depth+=4;
         for(let j = 0;j<length;j++){
-            if(j >= l && j<=r){
-                green(j)
-            }else{
-                red(j);
+            if(j >= l && j<=r && j!=toFind){
+                green(j, depth)
+            }else if(j!=toFind){
+                red(j, depth);
             }
         }
         let m = Math.round((l+r)/2);
         if(m == toFind){
+            elementFound(toFind, depth);
             break;
         }else if(toFind < m){
             r = m - 1;
-           // task(m);
         }else{
             l = m + 1;
-          //  task(m);
         }
     }
 }
-//FIX binary search
 function fadeOut(element) {
     var op = 1;
     var timer = setInterval(function () {
@@ -67,5 +72,16 @@ function fadeIn(element) {
         element.style.filter = 'alpha(opacity=' + op * 100 + ")";
         op += op * 0.1;
     }, 10);
+}
+
+function elementFound(found, depth){
+    if (!depth) depth = found;
+    setTimeout(function() {
+        document.getElementById('prompt').style.display = 'block';
+        console.log('#box-'+found);
+        const foundBox = document.querySelector('#box-'+found);
+        foundBox.style.backgroundColor = '#45A978';
+        foundBox.style.transform = 'scale(1.5, 1.5)';
+    }, 300 * depth);
 }
 export {sequentialSearch, binarySearch};

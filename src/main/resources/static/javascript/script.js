@@ -13,7 +13,7 @@ function generateArray(){
     const array = document.querySelector('.array');
     for(let i=0; i<arraySizeValue;i++){
         if(i == toFind){
-            array.innerHTML += '<div class="box green"></div>';
+            array.innerHTML += '<div class="box green" id="box-'+i+'"></div>';
         }else{
             array.innerHTML += '<div class="box" id="box-'+i+'"></div>';
         }
@@ -22,6 +22,7 @@ function generateArray(){
 function eraseArray(){
     const array = document.querySelector('.array');
     array.innerHTML = '';
+    document.getElementById('prompt').style.display = 'none';
 }
 
 
