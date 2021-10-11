@@ -4,7 +4,6 @@ html{
 body{
     background-color:#3AC9D9;
     margin: 0;
-    text-align: center;
     font-size: 20px;
 }
 nav {
@@ -38,6 +37,10 @@ a {
 }
 .full-screen{
     height: 100vh;
+    max-width: 100%;
+    padding-top:5em;
+}
+.full-screen-no-height{
     max-width: 100%;
     padding-top:5em;
 }
@@ -84,11 +87,31 @@ button{
     display: flex;
     flex-direction: row;
     justify-content: center;
-    margin-top: 30px;
+    margin: 0 30px;
 }
 .green{
     background-color: #436E73;
 }
 #prompt{
     display: none;
+}
+pre {
+    background: hsl(159, 17%, 80%);
+    border: 1px solid #ddd;
+    border-left: 5px solid #4E9A7F;
+    color: #666;
+    page-break-inside: avoid;
+    font-family: monospace;
+    font-size: 15px;
+    line-height: 1.6;
+    margin-bottom: 1.6em;
+    width: 60%;
+    max-width: 100%;
+    overflow: auto;
+    padding: 1em 1.5em;
+    display: block;
+    word-wrap: break-word;
+}
+#searching{
+    text-align: center;
 }

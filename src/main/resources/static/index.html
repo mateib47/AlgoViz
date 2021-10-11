@@ -31,6 +31,52 @@
                 </form>
                 <p id="prompt">The element was found!</p>
                 <div class="array"></div>
+                <br>
+                <a href="#descriptions">&#8595;  Find out more about the algorithms  &#8595;</a>
+            </section>
+            <section id="descriptions" class="full-screen-no-height">
+                <div class="description">
+                    <h1>Sequential Search</h1>
+                    <p>The sequential search, also known as linear search is a method for finding an
+                        element within a list. It sequentially checks each element of the list until
+                        a match is found or the whole list has been searched.</p>
+                    <pre><code>
+function sequentialSearch(toFind, length){
+    for(let i = 0; i<length; i++){
+        if(i == toFind){
+            console.log("Element found!")
+            break;
+        }
+    }
+}
+                    </code></pre>
+                </div>
+                <div>
+                    <h1>Binary Search</h1>
+                    <p>Binary search is a search algorithm that finds the position of a target value
+                        within a sorted array. Binary search compares the target value to the middle
+                        element of the array. If they are not equal, the half in which the target
+                        cannot lie is eliminated and the search continues on the remaining half, again
+                        taking the middle element to compare to the target value, and repeating this
+                        until the target value is found. If the search ends with the remaining half
+                        being empty, the target is not in the array.</p>
+                    <pre><code>
+function binarySearch(toFind, length){
+    let l = 0, r = length-1;
+    while(l<=r){
+        let m = Math.round((l+r)/2);
+        if(m == toFind){
+                        console.log("Element found!")
+            break;
+        }else if(toFind < m){
+            r = m - 1;
+        }else{
+            l = m + 1;
+        }
+    }
+}
+                    </code></pre>
+                </div>
             </section>
         </main>
     </body>
