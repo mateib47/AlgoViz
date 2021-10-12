@@ -9,6 +9,7 @@ arraySize.addEventListener('change', event =>{
 });
 
 function generateArray(){
+    eraseArray();
     toFind = Math.floor(Math.random() * arraySizeValue)
     const array = document.querySelector('.array');
     for(let i=0; i<arraySizeValue;i++){

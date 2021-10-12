@@ -50,7 +50,7 @@ form {
     align-items: center;
 }
 main{
-    margin: 0px 70px;
+    margin: 0 100px;
 }
 .input{
     width: 30%;
@@ -60,11 +60,7 @@ main{
     border: 0;
 }
 p, h1, label{
-    color: #fff;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
+    color: #FFFFFF;
 }
 button{
     color: #F2ECD8;
@@ -74,6 +70,7 @@ button{
     padding: 20px;
     font-size: 15px;
     cursor: pointer;
+    margin:20px 0;
 }
 .box{
     background-color: #FFFFFF;
@@ -98,7 +95,7 @@ button{
 pre {
     background: hsl(159, 17%, 80%);
     border: 1px solid #ddd;
-    border-left: 5px solid #4E9A7F;
+    border-left: 5px solid #0F6A8B;
     color: #666;
     page-break-inside: avoid;
     font-family: monospace;
@@ -114,4 +111,24 @@ pre {
 }
 #searching{
     text-align: center;
+}
+footer{
+    background-color: #0F6A8B;
+    display: flex;
+    justify-content: flex-end;
+    padding: 20px;
+    font-size: 15px;
+}
+.center{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    text-align: center;
+    margin: auto;
+}
+#welcome{
+    margin: 0 20%;
+}
+.italic{
+    font-style: italic;
 }
