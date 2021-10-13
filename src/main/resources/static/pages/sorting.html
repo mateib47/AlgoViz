@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" type="text/css" href="../css/style.css">
+    <meta content="width=device-width, initial-scale=1" name="viewport" />
+    <title>AlgoViz</title>
+</head>
+<body>
+<nav>
+    <a href="../index.html" id="nav-title">AlgoViz</a>
+    <div class="nav-links">
+        <a href="../pages/searching.html" class="nav-link">Searching</a>
+        <a href="../pages/sorting.html" class="nav-link">Sorting</a>
+        <a href="#graphs" class="nav-link">Graphs</a>
+        <a href="#graphs" class="nav-link">Trees</a>
+    </div>
+</nav>
+<main>
+    <section id="sorting" class="full-screen">
+        <form id="sorting-form" action="">
+            <button class="new-array-sorting">Generate new array</button>
+            <label for="sorting-size-input">Enter the length of array</label>
+            <input id="sorting-size-input" type="number" class="input" placeholder="e.g. 12" max="30">
+            <label for="searching-alg">Enter the algorithm</label>
+            <select name="algorithms" id="searching-alg" class="input">
+                <option value="sequential">Sequential</option>
+                <option value="binary">Binary</option>
+            </select>
+            <button>Let's sort!</button>
+        </form>
+        <p id="prompt">The element was found!</p>
+        <div id="array-sorting" class="array"></div>
+        <br>
+        <a href="">&#8595;  Find out more about the algorithms  &#8595;</a>
+    </section>
+</main>
+<footer>
+    <a href="https://mateib47.github.io/personal-portofolio-webpage/" target="_blank">@Created by Matei Bucur</a>
+</footer>
+</body>
+<script type="module" src="../javascript/algorithms/searching.js"></script>
+<script type="module" src="../javascript/script.js"></script>
+
+</html>

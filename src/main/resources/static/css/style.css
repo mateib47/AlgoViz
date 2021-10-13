@@ -80,6 +80,16 @@ button{
     transition:1s;
     transition-timing-function: ease-out;
 }
+.bar{
+    background-color: #FFFFFF;
+    width: 20px;
+    margin-right: 10px;
+    transition:1s;
+    transition-timing-function: ease-out;
+}
+#array-sorting{
+    height: 180px;
+}
 .array{
     display: flex;
     flex-direction: row;

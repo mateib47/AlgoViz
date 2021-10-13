@@ -10,8 +10,8 @@
 <nav>
   <a href="../index.html" id="nav-title">AlgoViz</a>
   <div class="nav-links">
-    <a href="../static/pages/searching.html" class="nav-link">Searching</a>
-    <a href="#sorting" class="nav-link">Sorting</a>
+    <a href="../pages/searching.html" class="nav-link">Searching</a>
+    <a href="../pages/sorting.html" class="nav-link">Sorting</a>
     <a href="#graphs" class="nav-link">Graphs</a>
     <a href="#graphs" class="nav-link">Trees</a>
   </div>
@@ -19,7 +19,7 @@
 <main>
   <section id="searching" class="full-screen">
     <form id="searching-form" action="">
-      <button id="new-array">Generate new array</button>
+      <button id="new-array-searching" class="new-array">Generate new array</button>
       <label for="sorting-size-input">Enter the length of array</label>
       <input id="sorting-size-input" type="number" class="input" placeholder="e.g. 12" max="30">
       <label for="searching-alg">Enter the algorithm</label>
@@ -30,7 +30,7 @@
       <button>Let's search</button>
     </form>
     <p id="prompt">The element was found!</p>
-    <div class="array"></div>
+    <div id="array-searching" class="array"></div>
     <br>
     <a href="#descriptions">&#8595;  Find out more about the algorithms  &#8595;</a>
   </section>
