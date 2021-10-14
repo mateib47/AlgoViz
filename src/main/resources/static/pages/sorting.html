@@ -19,13 +19,15 @@
 <main>
     <section id="sorting" class="full-screen">
         <form id="sorting-form" action="">
-            <button class="new-array-sorting">Generate new array</button>
+            <button id="new-array-sorting" class="new-array">Generate new array</button>
             <label for="sorting-size-input">Enter the length of array</label>
-            <input id="sorting-size-input" type="number" class="input" placeholder="e.g. 12" max="30">
-            <label for="searching-alg">Enter the algorithm</label>
-            <select name="algorithms" id="searching-alg" class="input">
-                <option value="sequential">Sequential</option>
-                <option value="binary">Binary</option>
+            <input id="sorting-size-input" type="number" class="input size-input" placeholder="e.g. 12" max="30">
+            <label for="sorting-alg">Enter the algorithm</label>
+            <select name="algorithms" id="sorting-alg" class="input">
+                <option value="HeapSort">HeapSort</option>
+                <option value="QuickSort">QuickSort</option>
+                <option value="MergeSort">MergeSort</option>
+                <option value="BubbleSort">BubbleSort</option>
             </select>
             <button>Let's sort!</button>
         </form>

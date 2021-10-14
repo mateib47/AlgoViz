@@ -2,6 +2,4 @@
 -fix seq search code display and add code complexity for both
 - padding for the form and buttons
 sorting
--fix array generation
-generate new array button
-fix id's
+make the form in a modal menu
