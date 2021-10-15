@@ -78,7 +78,6 @@ function elementFound(found, depth){
     if (!depth) depth = found;
     setTimeout(function() {
         document.getElementById('prompt').style.display = 'block';
-        console.log('#box-'+found);
         const foundBox = document.querySelector('#box-'+found);
         foundBox.style.backgroundColor = '#45A978';
         foundBox.style.transform = 'scale(1.5, 1.5)';

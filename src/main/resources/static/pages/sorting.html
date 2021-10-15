@@ -18,16 +18,16 @@
 </nav>
 <main>
     <section id="sorting" class="full-screen">
-        <form id="sorting-form" action="">
+        <form id="sorting-form" class="form" action="">
             <button id="new-array-sorting" class="new-array">Generate new array</button>
             <label for="sorting-size-input">Enter the length of array</label>
             <input id="sorting-size-input" type="number" class="input size-input" placeholder="e.g. 12" max="30">
             <label for="sorting-alg">Enter the algorithm</label>
             <select name="algorithms" id="sorting-alg" class="input">
-                <option value="HeapSort">HeapSort</option>
-                <option value="QuickSort">QuickSort</option>
-                <option value="MergeSort">MergeSort</option>
-                <option value="BubbleSort">BubbleSort</option>
+                <option value="heap">HeapSort</option>
+                <option value="quick">QuickSort</option>
+                <option value="merge">MergeSort</option>
+                <option value="bubble">BubbleSort</option>
             </select>
             <button>Let's sort!</button>
         </form>
@@ -41,7 +41,7 @@
     <a href="https://mateib47.github.io/personal-portofolio-webpage/" target="_blank">@Created by Matei Bucur</a>
 </footer>
 </body>
-<script type="module" src="../javascript/algorithms/searching.js"></script>
+<script type="module" src="../javascript/algorithms/sorting.js"></script>
 <script type="module" src="../javascript/script.js"></script>
 
 </html>

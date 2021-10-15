@@ -1,17 +1,23 @@
 import {sequentialSearch, binarySearch} from './algorithms/searching.js';
+import {bubbleSort, quickSort, mergeSort, heapSort} from './algorithms/sorting.js';
+
 
 let arraySizeValue;
 let toFind;
-const arraySize = document.querySelector('#sorting-size-input');
+let arrayValues = [];
 
-arraySize.addEventListener('change', event =>{
-    arraySizeValue = event.target.value
-    if(event.target.id === 'new-array-searching'){
-        generateSearchingArray();
-    }else{
-        generateSortingArray();
-    }
+const arraySize = document.getElementsByClassName('size-input');
+Array.from(arraySize).forEach(function (element){
+    element.addEventListener('change', event =>{
+        arraySizeValue = event.target.value
+        if(event.target.id === 'searching-size-input'){
+            generateSearchingArray();
+        }else if(event.target.id === 'sorting-size-input'){
+            generateSortingArray();
+        }
+    });
 });
+
 
 function generateSearchingArray(){
     eraseArray();
@@ -32,9 +38,11 @@ function generateSortingArray(){
         arr[i] = i;
     }
     arr = shuffle([...arr]);
+    arrayValues=[...arr];
     const array = document.querySelector('#array-sorting');
     for(let i=0; i<arraySizeValue;i++){
-            array.innerHTML += `<div class="bar" id="${'bar'+arr[i]}" style="max-height:${arr[i]*10}% "></div>`;
+            const value = (arr[i]+1)*(100/arraySizeValue);
+            array.innerHTML += `<div class="bar" id="${'bar-'+i}" style="max-height:${value}% "></div>`;
     }
 }
 function shuffle(array){
@@ -44,7 +52,6 @@ function shuffle(array){
         array[i] = array[rand];
         array[rand] = temp;
     }
-    console.log(array);
     return array;
 }
 
@@ -68,26 +75,45 @@ Array.from(newArray).forEach(function (element){
             eraseArray();
             if(event.target.id === 'new-array-searching'){
                 generateSearchingArray();
-            }else{
+            }else if(event.target.id === 'new-array-sorting'){
                 generateSortingArray();
             }
         }
     });
 });
 
-const searchingForm = document.querySelector('#searching-form');
-searchingForm.addEventListener('submit', event => {
-    event.preventDefault();
-    const lengthInput = document.querySelector('#sorting-size-input');
-    const algTypeInput = document.querySelector('#searching-alg');
-    const  length = lengthInput.value.trim();
-    const algType = algTypeInput.value;
-    if(algType !== '' && length !== ''){
-      if(algType == 'sequential'){
-        sequentialSearch(toFind, length);
-      }else if(algType == 'binary'){
-          binarySearch(toFind, length);
-      }
-    }
+const searchingForm = document.getElementsByClassName('form');
+Array.from(searchingForm).forEach(function (element) {
+    element.addEventListener('submit', event => {
+        event.preventDefault();
+        const lengthInput = event.target[1];
+        const algTypeInput = event.target[2];
+        const  length = lengthInput.value.trim();
+        const algType = algTypeInput.value;
+        if(algType !== '' && length !== ''){
+            switch (algType){
+                case 'sequential':
+                    sequentialSearch(toFind, length);
+                    break;
+                case 'binary':
+                    binarySearch(toFind, length);
+                    break;
+                case 'heap':
+                    heapSort(length);
+                    break;
+                case 'quick':
+                    quickSort(arrayValues);
+                    break;
+                case 'merge':
+                    mergeSort(length, arrayValues);
+                    break;
+                case 'bubble':
+                    bubbleSort(length);
+                    break
+            }
+        }
+    });
 });
+
+
 
