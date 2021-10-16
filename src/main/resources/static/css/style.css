@@ -84,8 +84,6 @@ button{
     background-color: #FFFFFF;
     width: 20px;
     margin-right: 10px;
-    transition:2s;
-    transition-timing-function: ease-out;
 }
 #array-sorting{
     height: 180px;

@@ -19,22 +19,54 @@
 <main>
     <section id="sorting" class="full-screen">
         <form id="sorting-form" class="form" action="">
+            <a href="#sorting-descriptions">&#8595;  Find out more about the algorithms  &#8595;</a>
             <button id="new-array-sorting" class="new-array">Generate new array</button>
             <label for="sorting-size-input">Enter the length of array</label>
             <input id="sorting-size-input" type="number" class="input size-input" placeholder="e.g. 12" max="30">
             <label for="sorting-alg">Enter the algorithm</label>
             <select name="algorithms" id="sorting-alg" class="input">
-                <option value="heap">HeapSort</option>
-                <option value="quick">QuickSort</option>
-                <option value="merge">MergeSort</option>
                 <option value="bubble">BubbleSort</option>
+                <option value="merge">MergeSort</option>
+                <option value="quick">QuickSort</option>
+                <option value="heap">HeapSort</option>
             </select>
             <button>Let's sort!</button>
         </form>
         <p id="prompt">The element was found!</p>
         <div id="array-sorting" class="array"></div>
         <br>
-        <a href="">&#8595;  Find out more about the algorithms  &#8595;</a>
+    </section>
+    <section id="sorting-descriptions" class="full-screen-no-height">
+        <div class="description">
+            <h1>Bubble Sort</h1>
+            <p>Bubble sort, sometimes referred to as sinking sort,
+                is a simple sorting algorithm that repeatedly steps
+                through the list, compares adjacent elements and swaps
+                them if they are in the wrong order. The pass through
+                the list is repeated until the list is sorted. The algorithm,
+                which is a comparison sort, is named for the way smaller or larger
+                elements "bubble" to the top of the list.
+            </p>
+            <pre><code>
+function bubbleSort(length){
+    let sorted = false;
+    while(!sorted){
+        sorted = true;
+        for(let i = 0;i< length-1;i++){
+            let a = document.querySelector('#bar-'+i);
+            let b = document.querySelector('#bar-'+`${i+1}`)
+            if((parseFloat(a.style.maxHeight) / 100.0)>(parseFloat(b.style.maxHeight) / 100.0)){
+                sorted = false
+                let temp = a.style.maxHeight;
+                a.style.maxHeight = b.style.maxHeight;
+                b.style.maxHeight = temp;
+            }
+        }
+    }
+}
+      </code></pre>
+            <p class="italic">The average and worst-case time complexity of Bubble Sort is <b>O(n²)</b>.</p>
+        </div>
     </section>
 </main>
 <footer>
