@@ -14,7 +14,6 @@ function task(count, length, i) {
     setTimeout(function() {
         let a = document.querySelector('#bar-'+i);
         let b = document.querySelector('#bar-'+`${i+1}`);
-        console.log(a+" "+b);
         if((parseFloat(a.style.maxHeight) / 100.0)>(parseFloat(b.style.maxHeight) / 100.0)){
             let temp = a.style.maxHeight;
             a.style.maxHeight = b.style.maxHeight;
@@ -25,13 +24,15 @@ function task(count, length, i) {
 function quickSort(length){
 
 }
-let mergeCount = 0;
-function mergeSort(length){
+async function mergeSort(length){
     let array = [];
     for(let i=0;i<length;i++){
         array.push({value:parseFloat(document.querySelector('#bar-'+`${i}`).style.maxHeight)/100.0, id: i, percent: document.querySelector('#bar-'+`${i}`).style.maxHeight});
     }
-    console.log(mergeSorting(array));
+    await console.log(mergeSorting(array));
+    for(let i=0;i<mergeCount;i++){
+        let a = await mergeTask(display[i], i);
+    }
 }
 function mergeSorting(array){
     const half = array.length / 2;
@@ -41,6 +42,8 @@ function mergeSorting(array){
     const left = array.splice(0, half);
     return merge(mergeSorting(left), mergeSorting(array));
 }
+let mergeCount = 0;
+let display = [];
 function merge(left, right){
     mergeCount++;
     let arr = [];
@@ -59,16 +62,23 @@ function merge(left, right){
     for (let i=0; i< result.length;i++){
         result[i].id = i+min;
     }
-    mergeTask(result);
+    display.push([...result]);
+    //mergeTask(result,mergeCount);
     return result;
 }
-function mergeTask(array) {
-    console.log(mergeCount);
-    setTimeout(function() {
+const timeout = ms => new Promise(resolve => setTimeout(resolve, ms));
+
+async function mergeTask(array, mergeCount) {
+    console.log(array);
+   // setTimeout(function() {
         for(let e of array){
+            console.log('#bar-'+e.id);
             document.querySelector('#bar-'+e.id).style.maxHeight = e.percent;
+
         }
-    }, 300*mergeCount);
+  //  }, 300 * mergeCount);
+    await timeout(1000);
+    return 0;
 }
 function delay(i) {
     setTimeout(function () {
