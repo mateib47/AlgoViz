@@ -30,8 +30,8 @@ async function mergeSort(length){
         array.push({value:parseFloat(document.querySelector('#bar-'+`${i}`).style.maxHeight)/100.0, id: i, percent: document.querySelector('#bar-'+`${i}`).style.maxHeight});
     }
     await console.log(mergeSorting(array));
-    for(let i=0;i<mergeCount;i++){
-        let a = await mergeTask(display[i], i);
+    for(let i=0;i<display.length;i++){
+        mergeTask(display[i], i);
     }
 }
 function mergeSorting(array){
@@ -58,27 +58,26 @@ function merge(left, right){
         }
     }
     const result = [...arr, ...left, ...right];
-    const min = Math.min(...result.map(elem => elem.id))
+    const min = Math.min(...result.map(elem => elem.id));
     for (let i=0; i< result.length;i++){
         result[i].id = i+min;
     }
-    display.push([...result]);
-    //mergeTask(result,mergeCount);
+    let disp = [];
+    for(let e of result){
+        disp.push([e.id, e.percent])
+    }
+    display.push(disp);
     return result;
 }
 const timeout = ms => new Promise(resolve => setTimeout(resolve, ms));
 
-async function mergeTask(array, mergeCount) {
-    console.log(array);
-   // setTimeout(function() {
+function mergeTask(array, m) {
+   setTimeout(function() {
         for(let e of array){
-            console.log('#bar-'+e.id);
-            document.querySelector('#bar-'+e.id).style.maxHeight = e.percent;
+            document.querySelector('#bar-'+e[0]).style.maxHeight = e[1];
 
         }
-  //  }, 300 * mergeCount);
-    await timeout(1000);
-    return 0;
+  }, 600 * m);
 }
 function delay(i) {
     setTimeout(function () {
