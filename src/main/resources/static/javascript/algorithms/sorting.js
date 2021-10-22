@@ -4,13 +4,12 @@ function bubbleSort(length){
     while(count<=length*length){
         sorted = true;
         for(let i = 0;i< length-1;i++){
-            task(count, length, i)
+            bubbleTask(count, length, i)
             count++;
         }
     }
 }
-
-function task(count, length, i) {
+function bubbleTask(count, length, i) {
     setTimeout(function() {
         let a = document.querySelector('#bar-'+i);
         let b = document.querySelector('#bar-'+`${i+1}`);
@@ -21,17 +20,25 @@ function task(count, length, i) {
         }
     }, 300 * count);
 }
-function quickSort(length){
 
-}
-async function mergeSort(length){
+function initArray(length){
     let array = [];
     for(let i=0;i<length;i++){
-        array.push({value:parseFloat(document.querySelector('#bar-'+`${i}`).style.maxHeight)/100.0, id: i, percent: document.querySelector('#bar-'+`${i}`).style.maxHeight});
+        const elem = document.querySelector('#bar-'+`${i}`);
+        const value = parseFloat(elem.style.maxHeight)/100.0;
+        const percent = elem.style.maxHeight;
+        array.push({value, id: i, percent});
     }
-    await console.log(mergeSorting(array));
-    for(let i=0;i<display.length;i++){
-        mergeTask(display[i], i);
+    return array;
+}
+
+let mergeCount = 0;
+let displayArray = [];
+function mergeSort(length){
+    let array = initArray(length);
+    mergeSorting(array);
+    for(let i=0;i<displayArray.length;i++){
+        mergeTask(displayArray[i], i);
     }
 }
 function mergeSorting(array){
@@ -42,8 +49,6 @@ function mergeSorting(array){
     const left = array.splice(0, half);
     return merge(mergeSorting(left), mergeSorting(array));
 }
-let mergeCount = 0;
-let display = [];
 function merge(left, right){
     mergeCount++;
     let arr = [];
@@ -58,19 +63,20 @@ function merge(left, right){
         }
     }
     const result = [...arr, ...left, ...right];
+    updateDisplay(result);
+    return result;
+}
+function updateDisplay(result){
     const min = Math.min(...result.map(elem => elem.id));
     for (let i=0; i< result.length;i++){
         result[i].id = i+min;
     }
-    let disp = [];
+    let arr = [];
     for(let e of result){
-        disp.push([e.id, e.percent])
+        arr.push([e.id, e.percent])
     }
-    display.push(disp);
-    return result;
+    displayArray.push(arr);
 }
-const timeout = ms => new Promise(resolve => setTimeout(resolve, ms));
-
 function mergeTask(array, m) {
    setTimeout(function() {
         for(let e of array){
@@ -78,6 +84,25 @@ function mergeTask(array, m) {
 
         }
   }, 600 * m);
+}
+
+function quickSort(length){
+    let array = initArray(length);
+    console.log(quickSorting(array));
+    for(let i=0;i<displayArray.length;i++){
+        //visualization
+    }
+}
+function quickSorting(array){
+    if (array.length <= 1) {
+        return array;
+    }
+    const pivot = array[0];
+    let left = [], right = [];
+    for(let i=0;i<array.length;i++){
+        array[i].value < pivot ? left.push(array[i]) : right.push(array[i]);
+    }
+    return quickSorting(left.concat(pivot, quickSorting(right)));
 }
 function delay(i) {
     setTimeout(function () {
@@ -90,5 +115,4 @@ function heapSort(){
 function sortingDone(){
     alert('Done');
 }
-
 export {bubbleSort, quickSort, mergeSort, heapSort};

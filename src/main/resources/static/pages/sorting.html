@@ -102,6 +102,29 @@ function merge(left, right) {
         </code></pre>
         <p class="italic">Time complexity of Merge Sort is <b>O(n*Log n)</b> in all the 3 cases (worst, average and best)</p>
     </div>
+    <div class="description">
+        <h1>Quick Sort</h1>
+        <p>Quicksort is a type of divide and conquer algorithm
+            for sorting an array, based on a partitioning routine. The
+            details of this partitioning can vary somewhat, so that quicksort
+            is really a family of closely related algorithms.</p>
+        <p>The steps for in-place quicksort are:</p>
+        <ol>
+            <li>If the range has less than two elements, return immediately
+                as there is nothing to do. Possibly for other very short lengths
+                a special-purpose sorting method is applied and the remainder of these steps skipped.</li>
+            <li>Otherwise pick a value, called a pivot, that occurs in the range</li>
+            <li>Partition the range: reorder its elements, while determining a point of division,
+                so that all elements with values less than the pivot come before the division,
+                while all elements with values greater than the pivot come after it; elements that are
+                equal to the pivot can go either way</li>
+            <li>Recursively apply the quicksort to the sub-range up to the point of division and
+                to the sub-range after it, possibly excluding from both ranges the element equal
+                to the pivot at the point of division</li>
+        </ol>
+        <pre><code></code></pre>
+        <p class="italic">The average and best-case time complexity for quicksort(simple partition) is <b>O(n log(n))</b>. The worst-case performance is <b>O(n^2)</b>.</p>
+    </div>
 </main>
 <footer>
     <a href="https://mateib47.github.io/personal-portofolio-webpage/" target="_blank">@Created by Matei Bucur</a>
