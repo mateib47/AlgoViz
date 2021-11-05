@@ -77,11 +77,11 @@ function updateDisplay(result){
     }
     displayArray.push(arr);
 }
+
 function mergeTask(array, m) {
    setTimeout(function() {
         for(let e of array){
             document.querySelector('#bar-'+e[0]).style.maxHeight = e[1];
-
         }
   }, 600 * m);
 }
@@ -90,19 +90,21 @@ function quickSort(length){
     let array = initArray(length);
     console.log(quickSorting(array));
     for(let i=0;i<displayArray.length;i++){
-        //visualization
+        mergeTask(displayArray[i], i); //rename this
     }
 }
 function quickSorting(array){
     if (array.length <= 1) {
         return array;
     }
-    const pivot = array[0];
+    const pivot = array[0].value;
     let left = [], right = [];
-    for(let i=0;i<array.length;i++){
+    for(let i=1;i<array.length;i++){
         array[i].value < pivot ? left.push(array[i]) : right.push(array[i]);
     }
-    return quickSorting(left.concat(pivot, quickSorting(right)));
+ //   updateDisplay(left);
+  //  updateDisplay(right); adapt for quicksort
+    return quickSorting(left).concat(pivot, quickSorting(right));
 }
 function delay(i) {
     setTimeout(function () {

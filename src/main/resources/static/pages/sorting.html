@@ -122,7 +122,19 @@ function merge(left, right) {
                 to the sub-range after it, possibly excluding from both ranges the element equal
                 to the pivot at the point of division</li>
         </ol>
-        <pre><code></code></pre>
+        <pre><code>function quickSort(array){
+    if (array.length <= 1) {
+        return array;
+    }
+    const pivot = array[0];
+    let left = [], right = [];
+    for(let i=1;i < array.length;i++){
+        array[i] < pivot ?
+            left.push(array[i]) : right.push(array[i]);
+    }
+    return quickSort(left).concat(pivot, quickSort(right));
+}
+        </code></pre>
         <p class="italic">The average and best-case time complexity for quicksort(simple partition) is <b>O(n log(n))</b>. The worst-case performance is <b>O(n^2)</b>.</p>
     </div>
 </main>

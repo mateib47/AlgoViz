@@ -102,7 +102,7 @@ Array.from(searchingForm).forEach(function (element) {
                     heapSort(length);
                     break;
                 case 'quick':
-                    quickSort(arrayValues);
+                    quickSort(length);
                     break;
                 case 'merge':
                     mergeSort(length, arrayValues);
