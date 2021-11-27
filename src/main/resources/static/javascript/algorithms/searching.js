@@ -83,4 +83,3 @@ function elementFound(found, depth){
         foundBox.style.transform = 'scale(1.5, 1.5)';
     }, 300 * depth);
 }
-export {sequentialSearch, binarySearch};

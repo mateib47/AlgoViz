@@ -117,4 +117,3 @@ function heapSort(){
 function sortingDone(){
     alert('Done');
 }
-export {bubbleSort, quickSort, mergeSort, heapSort};

@@ -1,7 +1,3 @@
-import {sequentialSearch, binarySearch} from './algorithms/searching.js';
-import {bubbleSort, quickSort, mergeSort, heapSort} from './algorithms/sorting.js';
-
-
 let arraySizeValue;
 let toFind;
 let arrayValues = [];
