@@ -20,7 +20,13 @@
   <section id="searching" class="full-screen">
     <form id="searching-form" class="form" action="">
       <button id="new-array-searching" class="new-array">Generate new array</button>
-      <label for="searching-size-input">Enter the length of array</label>
+      <fieldset id="dimension">
+        <label for="linear">Linear</label>
+        <input id="linear" type="radio" value="linear" name="dimension" checked>
+        <label for="matrix">Matrix</label>
+        <input id="matrix" type="radio" value="matrix" name="dimension">
+      </fieldset>
+      <label for="searching-size-input">Enter the size</label>
       <input id="searching-size-input" type="number" class="input size-input" placeholder="e.g. 12" max="50">
       <label for="searching-alg">Enter the algorithm</label>
       <select name="algorithms" id="searching-alg" class="input">

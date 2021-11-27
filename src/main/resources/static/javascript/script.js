@@ -14,6 +14,8 @@ Array.from(arraySize).forEach(function (element){
     });
 });
 
+const dimension = document.getElementsByClassName('dimension-radio');
+
 
 function generateSearchingArray(){
     eraseArray();
