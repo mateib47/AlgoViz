@@ -1,11 +1,12 @@
 let arraySizeValue;
 let toFind;
 let arrayValues = [];
+let dimensionVal = 1;
 
 const arraySize = document.getElementsByClassName('size-input');
 Array.from(arraySize).forEach(function (element){
     element.addEventListener('change', event =>{
-        arraySizeValue = event.target.value
+        arraySizeValue = event.target.value;
         if(event.target.id === 'searching-size-input'){
             generateSearchingArray();
         }else if(event.target.id === 'sorting-size-input'){
@@ -14,20 +15,43 @@ Array.from(arraySize).forEach(function (element){
     });
 });
 
-const dimension = document.getElementsByClassName('dimension-radio');
+const dimension = document.getElementsByClassName('dim-radio');
+Array.from(dimension).forEach(function (element){
+    element.addEventListener('change', event =>{
+        dimensionVal = event.target.value;
+        if(arraySizeValue){
+            console.log('aa');
+            generateSearchingArray();
+        }  
+    });
+});
 
 
 function generateSearchingArray(){
     eraseArray();
-    toFind = Math.floor(Math.random() * arraySizeValue)
+    let arrayHtml = '';
     const array = document.querySelector('#array-searching');
-    for(let i=0; i<arraySizeValue;i++){
-        if(i == toFind){
-            array.innerHTML += '<div class="box green" id="box-'+i+'"></div>';
-        }else{
-            array.innerHTML += '<div class="box" id="box-'+i+'"></div>';
+    if(dimensionVal == 1){
+        toFind = Math.floor(Math.random() * arraySizeValue)
+        arrayHtml += '<div class="row">';
+        for(let i=0; i<arraySizeValue;i++){
+            if(i == toFind){
+                arrayHtml += '<div class="box green" id="box-'+i+'"></div>';
+            }else{
+                arrayHtml += '<div class="box" id="box-'+i+'"></div>';
+            }
+        }
+        arrayHtml += '</div>';
+    }else{
+        for(let i=0; i<arraySizeValue;i++){                
+            arrayHtml += '<div class="row">';
+            for(let j=0; j<arraySizeValue;j++){
+                arrayHtml += '<div class="box" id="box-'+i+'-'+j+'"></div>';
+            }
+            arrayHtml += '</div>';
         }
     }
+    array.innerHTML += arrayHtml;
 }
 function generateSortingArray(){
     eraseArray();
