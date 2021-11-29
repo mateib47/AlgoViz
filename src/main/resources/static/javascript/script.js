@@ -2,6 +2,7 @@ let arraySizeValue;
 let toFind;
 let arrayValues = [];
 let dimensionVal = 1;
+let matrix;
 
 const arraySize = document.getElementsByClassName('size-input');
 Array.from(arraySize).forEach(function (element){
@@ -20,11 +21,26 @@ Array.from(dimension).forEach(function (element){
     element.addEventListener('change', event =>{
         dimensionVal = event.target.value;
         if(arraySizeValue){
-            console.log('aa');
             generateSearchingArray();
         }  
     });
 });
+
+function boxesOnClick(){
+    const boxes = document.getElementsByClassName('mx-box');
+    Array.from(boxes).forEach(function (element){
+        element.addEventListener('click', event =>{
+            let coord = event.target.id.split('-').slice(1);
+            const cond = ['blue','green'];
+            const classList = event.target.classList;
+            if(!cond.some(el => Array.from(classList).includes(el))){
+                classList.add('black');
+                matrix[coord[0]][coord[1]] = -1;
+            }
+        });
+    });
+}
+
 
 
 function generateSearchingArray(){
@@ -43,15 +59,29 @@ function generateSearchingArray(){
         }
         arrayHtml += '</div>';
     }else{
-        for(let i=0; i<arraySizeValue;i++){                
+        matrix = [];
+        goal = [Math.floor(Math.random() * arraySizeValue), Math.floor(Math.random() * arraySizeValue)];
+        start = [Math.floor(Math.random() * arraySizeValue), Math.floor(Math.random() * arraySizeValue)];
+        for(let i=0; i<arraySizeValue;i++){ 
+            matrix[i] = [];               
             arrayHtml += '<div class="row">';
             for(let j=0; j<arraySizeValue;j++){
-                arrayHtml += '<div class="box" id="box-'+i+'-'+j+'"></div>';
+                if(i == goal[0] && j == goal[1]){
+                    arrayHtml += '<div class="mx-box green" id="box-'+i+'-'+j+'">&#8226;</div>';
+                    matrix[i][j] = 2;
+                }else if(i == start[0] && j == start[1]){
+                    arrayHtml += '<div class="mx-box blue" id="box-'+i+'-'+j+'">&#8227;</div>';
+                    matrix[i][j] = 1;
+                }else{
+                    matrix[i][j] = 0;
+                    arrayHtml += '<div class="mx-box" id="box-'+i+'-'+j+'"></div>';
+                }
             }
             arrayHtml += '</div>';
         }
     }
     array.innerHTML += arrayHtml;
+    boxesOnClick();
 }
 function generateSortingArray(){
     eraseArray();
