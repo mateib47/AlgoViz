@@ -1,5 +1,6 @@
 let arraySizeValue;
-let toFind;
+let goal;
+let start;
 let arrayValues = [];
 let dimensionVal = 1;
 let matrix;
@@ -20,6 +21,17 @@ const dimension = document.getElementsByClassName('dim-radio');
 Array.from(dimension).forEach(function (element){
     element.addEventListener('change', event =>{
         dimensionVal = event.target.value;
+        let dropdown = document.querySelector('#searching-alg');
+        if(dimensionVal == 1){
+            dropdown.innerHTML = `
+                <option value="sequential">Sequential</option>
+                <option value="binary">Binary</option>`;
+        }else if(dimensionVal == 2){
+            dropdown.innerHTML = `
+                <option value="dfs">DFS</option>
+                <option value="bfs">BFS</option>
+                <option value="dfsi">Informed DFS</option>`;
+        }
         if(arraySizeValue){
             generateSearchingArray();
         }  
@@ -48,10 +60,10 @@ function generateSearchingArray(){
     let arrayHtml = '';
     const array = document.querySelector('#array-searching');
     if(dimensionVal == 1){
-        toFind = Math.floor(Math.random() * arraySizeValue)
+        goal = Math.floor(Math.random() * arraySizeValue)
         arrayHtml += '<div class="row">';
         for(let i=0; i<arraySizeValue;i++){
-            if(i == toFind){
+            if(i == goal){
                 arrayHtml += '<div class="box green" id="box-'+i+'"></div>';
             }else{
                 arrayHtml += '<div class="box" id="box-'+i+'"></div>';
@@ -138,17 +150,17 @@ const searchingForm = document.getElementsByClassName('form');
 Array.from(searchingForm).forEach(function (element) {
     element.addEventListener('submit', event => {
         event.preventDefault();
-        const lengthInput = event.target[1];
-        const algTypeInput = event.target[2];
+        const lengthInput = document.querySelector('#searching-size-input');
+        const algTypeInput = document.querySelector('#searching-alg');
         const  length = lengthInput.value.trim();
         const algType = algTypeInput.value;
         if(algType !== '' && length !== ''){
             switch (algType){
                 case 'sequential':
-                    sequentialSearch(toFind, length);
+                    sequentialSearch(goal, length);
                     break;
                 case 'binary':
-                    binarySearch(toFind, length);
+                    binarySearch(goal, length);
                     break;
                 case 'heap':
                     heapSort(length);
@@ -162,6 +174,9 @@ Array.from(searchingForm).forEach(function (element) {
                 case 'bubble':
                     bubbleSort(length);
                     break
+                case 'bfs':
+                    bfs(start, goal, matrix);
+                    break;
             }
         }
     });

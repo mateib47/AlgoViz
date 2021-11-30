@@ -83,3 +83,33 @@ function elementFound(found, depth){
         foundBox.style.transform = 'scale(1.5, 1.5)';
     }, 300 * depth);
 }
+
+function bfs(start, goal, m){
+    let matrix = [...m];
+    let directions = [[-1,0],[0,1],[1,0],[0,-1]];
+    let frontier = [];
+    frontier.push(start);
+    while(frontier.length > 0){
+        let node = frontier.shift();
+        let x = node[0];
+        let y = node[1];
+        console.log(matrix[x][y])
+        if (matrix[x][y] == 2){
+            console.log("success");
+            break;
+        }
+        for(let i=0;i < 4; i++){
+            let xn = x + directions[i][0];
+            let yn = y + directions[i][1];
+            if(xn < matrix.length && yn < matrix[0].length && xn >= 0 && yn >= 0){
+                let next = matrix[xn][yn];
+                if(next == 0){
+                    matrix[xn][yn] = -2;
+                    frontier.push([xn,yn]);
+                }else if(next == 2){
+                    frontier.push([xn,yn]);
+                }
+            }
+        } 
+    }
+}
