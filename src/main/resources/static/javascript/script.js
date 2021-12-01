@@ -59,11 +59,11 @@ function generateSearchingArray(){
     eraseArray();
     let arrayHtml = '';
     const array = document.querySelector('#array-searching');
-    if(dimensionVal == 1){
+    if(dimensionVal === 1){
         goal = Math.floor(Math.random() * arraySizeValue)
         arrayHtml += '<div class="row">';
         for(let i=0; i<arraySizeValue;i++){
-            if(i == goal){
+            if(i === goal){
                 arrayHtml += '<div class="box green" id="box-'+i+'"></div>';
             }else{
                 arrayHtml += '<div class="box" id="box-'+i+'"></div>';
@@ -98,6 +98,7 @@ function generateSearchingArray(){
 function generateSortingArray(){
     eraseArray();
     let arr = [];
+    let arrayHTML = '';
     for (let i = 0;i<arraySizeValue;i++){
         arr[i] = i;
     }
@@ -106,8 +107,9 @@ function generateSortingArray(){
     const array = document.querySelector('#array-sorting');
     for(let i=0; i<arraySizeValue;i++){
             const value = (arr[i]+1)*(100/arraySizeValue);
-            array.innerHTML += `<div class="bar" id="${'bar-'+i}" style="max-height:${value}% "></div>`;
+            arrayHTML += `<div class="bar" id="${'bar-'+i}" style="max-height:${value}% "></div>`;
     }
+    array.innerHTML = arrayHTML;
 }
 function shuffle(array){
     for(let i=0;i<array.length;i++){
@@ -150,8 +152,8 @@ const searchingForm = document.getElementsByClassName('form');
 Array.from(searchingForm).forEach(function (element) {
     element.addEventListener('submit', event => {
         event.preventDefault();
-        const lengthInput = document.querySelector('#searching-size-input');
-        const algTypeInput = document.querySelector('#searching-alg');
+        const lengthInput = event.target.getElementsByClassName('size-input')[0];
+        const algTypeInput = event.target.getElementsByClassName('alg-input')[0];
         const  length = lengthInput.value.trim();
         const algType = algTypeInput.value;
         if(algType !== '' && length !== ''){
@@ -173,7 +175,7 @@ Array.from(searchingForm).forEach(function (element) {
                     break;
                 case 'bubble':
                     bubbleSort(length);
-                    break
+                    break;
                 case 'bfs':
                     bfs(start, goal, matrix);
                     break;
