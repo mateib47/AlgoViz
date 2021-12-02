@@ -1,3 +1,5 @@
+let directions = [[-1,0],[0,1],[1,0],[0,-1]];
+
 function sequentialSearch(toFind, length){
     for(let i = 0; i<length; i++){
         if(i == toFind){
@@ -87,7 +89,6 @@ function elementFound(found, depth){
 function bfs(start, goal, m){
     let steps = [];
     let matrix = [...m];
-    let directions = [[-1,0],[0,1],[1,0],[0,-1]];
     let frontier = [];
     frontier.push(start);
     while(frontier.length > 0){
@@ -95,8 +96,7 @@ function bfs(start, goal, m){
         let node = frontier.shift();
         let x = node[0];
         let y = node[1];
-        if (matrix[x][y] == 2){
-            console.log("success");
+        if (matrix[x][y] === 2){
             break;
         }
         for(let i=0;i < 4; i++){
@@ -104,21 +104,70 @@ function bfs(start, goal, m){
             let yn = y + directions[i][1];
             if(xn < matrix.length && yn < matrix[0].length && xn >= 0 && yn >= 0){
                 let next = matrix[xn][yn];
-                if(next == 0){
+                if(next === 0){
                     matrix[xn][yn] = -2;
                     frontier.push([xn,yn]);
                     neighbours.push([xn,yn]);
-                }else if(next == 2){
+                }else if(next === 2){
                     frontier.push([xn,yn]);
                 }
             }
         } 
         steps.push(neighbours);
     }
-    vizualise(steps);
+    visualise(steps);
 }
 
-function vizualise(steps){
+//todo in some cases, dfs goes around and cannot find
+// the path because some node is already explored so it
+// gets blocked and cannot find the route even if there is one
+
+function dfs(start,goal,m){
+    let steps = [];
+    let matrix = [...m];
+    let frontier = [];
+    frontier.push(start);
+    while(frontier.length > 0){
+        let neighbours = [];
+        let node = frontier.pop();
+        let x = node[0];
+        let y = node[1];
+        if (matrix[x][y] === 2){
+            console.log("success dfs");
+            console.log(matrix);
+            break;
+        }else if (matrix[x][y] !== 1){
+            matrix[x][y] = -2;
+        }
+        for(let i=0;i < 4; i++){
+            let xn = x + directions[i][0];
+            let yn = y + directions[i][1];
+            if(xn < matrix.length && yn < matrix[0].length && xn >= 0 && yn >= 0){
+                let next = matrix[xn][yn];
+                if(next === 0 && !includesCoord(xn,yn,frontier)){
+                    frontier.unshift([xn,yn]);
+                    neighbours.push([xn,yn]);
+                    break;
+                }else if(next === 2){
+                    frontier.push([xn,yn]);
+                }
+            }
+        }
+        steps.push(neighbours);
+    }
+    visualise(steps);
+}
+
+function includesCoord(x,y, array){
+    for(let e of array){
+        console.log(e+" "+x+" "+y);
+        if(x === e[0] && y === e[1])
+            return true;
+    }
+    return false;
+}
+
+function visualise(steps){
     for(let i=0; i < steps.length;i++){
         setTimeout(function () {
             for(let j=0; j < steps[i].length; j++){
@@ -127,8 +176,8 @@ function vizualise(steps){
                 document.querySelector('#box-'+x+'-'+y).style.backgroundColor = '#F8DE7E';
                 setTimeout(function () {
                     document.querySelector('#box-'+x+'-'+y).style.backgroundColor = '#4D8C57';
-                }, 10 * i);
+                }, 20 * i);
             }
-        }, 20 * i);
+        }, 30 * i);
     }
 }

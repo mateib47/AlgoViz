@@ -30,7 +30,7 @@ Array.from(dimension).forEach(function (element){
             dropdown.innerHTML = `
                 <option value="dfs">DFS</option>
                 <option value="bfs">BFS</option>
-                <option value="dfsi">Informed DFS</option>`;
+                <option value="astar">A*</option>`;
         }
         if(arraySizeValue){
             generateSearchingArray();
@@ -178,6 +178,9 @@ Array.from(searchingForm).forEach(function (element) {
                     break;
                 case 'bfs':
                     bfs(start, goal, matrix);
+                    break;
+                case 'dfs':
+                    dfs(start, goal, matrix);
                     break;
             }
         }
