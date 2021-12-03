@@ -12,8 +12,6 @@
   <div class="nav-links">
     <a href="../pages/searching.html" class="nav-link">Searching</a>
     <a href="../pages/sorting.html" class="nav-link">Sorting</a>
-    <a href="#graphs" class="nav-link">Graphs</a>
-    <a href="#graphs" class="nav-link">Trees</a>
   </div>
 </nav>
 <main>
@@ -89,6 +87,84 @@ function binarySearch(toFind, length){
       </code></pre>
         <p class="italic">The time complexity of Binary Search in the best case is O(1). In the worst case, the time complexity is <b>O(log n)</b>.</p>
     </div>
+      <div class="description">
+          <h1>Breadth-first search (BFS)</h1>
+          <p>Breadth-first search (BFS) is an algorithm for searching a tree data structure
+              for a node that satisfies a given property. It starts at the tree root and explores
+              all nodes at the present depth prior to moving on to the nodes at the next depth level
+              . Extra memory, usually a queue, is needed to keep track of the child nodes that were
+              encountered but not yet explored.</p>
+          <pre><code>
+function bfs(start, m){
+    let directions = [[-1,0],[0,1],[1,0],[0,-1]];
+    let matrix = [...m];
+    let frontier = [];
+    frontier.push(start);
+    while(frontier.length > 0){
+        let node = frontier.shift();
+        let x = node[0], y = node[1];
+        if (matrix[x][y] === 2){
+            break;
+        }
+        for(let i=0;i < 4; i++){
+            let xn = x + directions[i][0];
+            let yn = y + directions[i][1];
+            if(xn < matrix.length && yn < matrix[0].length && xn >= 0 && yn >= 0){
+                let next = matrix[xn][yn];
+                if(next === 0){
+                    matrix[xn][yn] = -2;
+                    frontier.push([xn,yn]);
+                }else if(next === 2){
+                    frontier.push([xn,yn]);
+                }
+            }
+        }
+    }
+}
+      </code></pre>
+          <p class="italic">The time complexity can be expressed as <b>O(|V|+|E|)</b>, since every vertex and every
+              edge will be explored in the worst case. |V| is the number of vertices and |E| is the number of edges
+              in the graph. Note that O(|E|) may vary between O(1) and O(|V|^{2}), depending on how sparse the input graph is.
+              The space complexity can be expressed as <b>O(|V|)</b>.</p>
+      </div>
+      <div class="description">
+          <h1>Depth-first search (DFS)</h1>
+          <p>Depth-first search (DFS) is an algorithm for traversing or searching tree or graph data structures.
+              The algorithm starts at the root node (selecting some arbitrary node as the root node in the case of
+              a graph) and explores as far as possible along each branch before backtracking.</p>
+          <pre><code>
+function dfs(start,m){
+    let matrix = [...m];
+    let frontier = [];
+    frontier.push(start);
+    while(frontier.length > 0){
+        let node = frontier.pop();
+        let x = node[0], y = node[1];
+        if (matrix[x][y] === 2){
+            break;
+        }else if (matrix[x][y] !== 1){
+            matrix[x][y] = -2;
+        }
+        for(let i=0;i < 4; i++){
+            let xn = x + directions[i][0];
+            let yn = y + directions[i][1];
+            if(xn < matrix.length && yn < matrix[0].length && xn >= 0 && yn >= 0){
+                let next = matrix[xn][yn];
+                if(next === 0 && !includesCoord(xn,yn,frontier)){
+                    frontier.unshift([xn,yn]);
+                    break;
+                }else if(next === 2){
+                    frontier.push([xn,yn]);
+                }
+            }
+        }
+    }
+}
+      </code></pre>
+          <p class="italic">DFS is typically used to traverse an entire graph, and takes time <b>O(|V| + |E|)</b>,
+              where |V| is the number of vertices and |E| the number of edges. It also uses space <b>O(|V|)</b> in the worst
+              case to store the stack of vertices on the current search path as well as the set of already-visited vertices. </p>
+      </div>
   </section>
 </main>
 <footer>

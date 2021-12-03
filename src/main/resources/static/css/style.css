@@ -43,6 +43,9 @@ a {
 .nav-link{
     margin-right: 30px;
 }
+.nav-links{
+    margin-right: 70px;
+}
 #nav-title{
     color: #F2ECD8;
     margin-left: 35px;
