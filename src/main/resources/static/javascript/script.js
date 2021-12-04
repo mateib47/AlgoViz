@@ -182,6 +182,9 @@ Array.from(searchingForm).forEach(function (element) {
                 case 'dfs':
                     dfs(start, goal, matrix);
                     break;
+                case 'astar':
+                    astar(start, goal, matrix);
+                    break;
             }
         }
     });

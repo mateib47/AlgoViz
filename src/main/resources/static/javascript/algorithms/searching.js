@@ -120,7 +120,7 @@ function bfs(start, goal, m){
 
 //todo in some cases, dfs goes around and cannot find
 // the path because some node is already explored so it
-// gets blocked and cannot find the route even if there is one
+// gets blocked and cannot find the route even if there is one; implement backtracking
 
 function dfs(start,goal,m){
     let steps = [];
@@ -157,6 +157,46 @@ function dfs(start,goal,m){
     }
     visualise(steps);
 }
+
+
+function astar(start, goal, m){
+    let steps = [];
+    let matrix = [...m];
+    let frontier = [];
+    frontier.push(start);
+    while(frontier.length > 0){
+        let node = frontier.shift();
+        let x = node[0];
+        let y = node[1];
+        if (matrix[x][y] === 2){
+            break;
+        }
+        let estimations = [];
+        for(let i=0;i < 4; i++){
+            let xn = x + directions[i][0];
+            let yn = y + directions[i][1];
+            if(xn < matrix.length && yn < matrix[0].length && xn >= 0 && yn >= 0){
+                let next = matrix[xn][yn];
+                if(next === 0){
+                    let h = Math.abs(xn - goal[0]) + Math.abs(yn - goal[1]);
+                    estimations.push({x:xn,y:yn,h:h});
+                }else if(next === 2){
+                    frontier.push([xn,yn]);
+                    break;
+                }
+            }
+        }
+        estimations.sort(function (a, b) {
+            return a.h - b.h
+        })
+        let min = [estimations[0].x,estimations[0].y];
+        matrix[estimations[0].x][estimations[0].y] = -2;
+        frontier.push(min);
+        steps.push([min]);
+    }
+    visualise(steps);
+}
+
 
 function includesCoord(x,y, array){
     for(let e of array){
