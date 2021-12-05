@@ -4,6 +4,7 @@ let start;
 let arrayValues = [];
 let dimensionVal = 1;
 let matrix;
+let isDrawing = false, x, y;
 
 const arraySize = document.getElementsByClassName('size-input');
 Array.from(arraySize).forEach(function (element){
@@ -49,7 +50,30 @@ function boxesOnClick(){
                 classList.add('black');
                 matrix[coord[0]][coord[1]] = -1;
             }
+            isDrawing = true;
         });
+    });
+    const canvas = document.querySelector('#array-searching');
+    canvas.addEventListener('mousedown', e => {
+        x = e.pageX;
+        y = e.pageY;
+        isDrawing = true;
+    });
+    canvas.addEventListener('mousemove', e => {
+        if (isDrawing === true) {
+         //  console.log(x+' '+y);
+            console.log(document.elementFromPoint(x,y));
+            x = e.pageX;
+            y = e.pageY;
+        }
+    });
+
+    window.addEventListener('mouseup', e => {
+        if (isDrawing === true) {
+            x = 0;
+            y = 0;
+            isDrawing = false;
+        }
     });
 }
 
