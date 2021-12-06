@@ -50,7 +50,6 @@ function boxesOnClick(){
                 classList.add('black');
                 matrix[coord[0]][coord[1]] = -1;
             }
-            isDrawing = true;
         });
     });
     const canvas = document.querySelector('#array-searching');
@@ -61,12 +60,18 @@ function boxesOnClick(){
     });
     canvas.addEventListener('mousemove', e => {
         if (isDrawing === true) {
-         //  console.log(x+' '+y);
-            console.log(document.elementFromPoint(x,y));
+            let elem = document.elementFromPoint(x,y);
+            let elemID = elem.id.split('-');
+            let classList = Array.from(elem.classList);
+            if(elemID[0] === 'mxbox' && !classList.includes('green') && !classList.includes('blue')){
+                elem.classList.add('black');
+                matrix[elemID[1]][elemID[2]] = -1
+            }
             x = e.pageX;
             y = e.pageY;
         }
     });
+//todo when you have to scroll to see the whole matrix, then there are problems with drawing
 
     window.addEventListener('mouseup', e => {
         if (isDrawing === true) {
@@ -103,14 +108,14 @@ function generateSearchingArray(){
             arrayHtml += '<div class="row">';
             for(let j=0; j<arraySizeValue;j++){
                 if(i == goal[0] && j == goal[1]){
-                    arrayHtml += '<div class="mx-box green" id="box-'+i+'-'+j+'">&#8226;</div>';
+                    arrayHtml += '<div class="mx-box green" id="mxbox-'+i+'-'+j+'">&#8226;</div>';
                     matrix[i][j] = 2;
                 }else if(i == start[0] && j == start[1]){
-                    arrayHtml += '<div class="mx-box blue" id="box-'+i+'-'+j+'">&#8227;</div>';
+                    arrayHtml += '<div class="mx-box blue" id="mxbox-'+i+'-'+j+'">&#8227;</div>';
                     matrix[i][j] = 1;
                 }else{
                     matrix[i][j] = 0;
-                    arrayHtml += '<div class="mx-box" id="box-'+i+'-'+j+'"></div>';
+                    arrayHtml += '<div class="mx-box" id="mxbox-'+i+'-'+j+'"></div>';
                 }
             }
             arrayHtml += '</div>';

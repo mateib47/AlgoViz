@@ -133,8 +133,6 @@ function dfs(start,goal,m){
         let x = node[0];
         let y = node[1];
         if (matrix[x][y] === 2){
-            console.log("success dfs");
-            console.log(matrix);
             break;
         }else if (matrix[x][y] !== 1){
             matrix[x][y] = -2;
@@ -189,10 +187,12 @@ function astar(start, goal, m){
         estimations.sort(function (a, b) {
             return a.h - b.h
         })
-        let min = [estimations[0].x,estimations[0].y];
-        matrix[estimations[0].x][estimations[0].y] = -2;
-        frontier.push(min);
-        steps.push([min]);
+        if (estimations[0]){
+            let min = [estimations[0].x,estimations[0].y];
+            matrix[estimations[0].x][estimations[0].y] = -2;
+            frontier.push(min);
+            steps.push([min]);
+        }
     }
     visualise(steps);
 }
@@ -213,9 +213,9 @@ function visualise(steps){
             for(let j=0; j < steps[i].length; j++){
                 let x = steps[i][j][0];
                 let y = steps[i][j][1];
-                document.querySelector('#box-'+x+'-'+y).style.backgroundColor = '#F8DE7E';
+                document.querySelector('#mxbox-'+x+'-'+y).style.backgroundColor = '#F8DE7E';
                 setTimeout(function () {
-                    document.querySelector('#box-'+x+'-'+y).style.backgroundColor = '#4D8C57';
+                    document.querySelector('#mxbox-'+x+'-'+y).style.backgroundColor = '#4D8C57';
                 }, 20 * i);
             }
         }, 30 * i);
