@@ -91,6 +91,7 @@ function bfs(start, goal, m){
     let matrix = [...m];
     let frontier = [];
     frontier.push(start);
+    let id = 0;
     while(frontier.length > 0){
         let neighbours = [];
         let node = frontier.shift();
@@ -109,11 +110,13 @@ function bfs(start, goal, m){
                     frontier.push([xn,yn]);
                     neighbours.push([xn,yn]);
                 }else if(next === 2){
-                    frontier.push([xn,yn]);
+                    frontier = [[xn,yn]];
+                    neighbours.push([xn,yn]);
                 }
             }
         } 
-        steps.push(neighbours);
+        steps.push({id,parent:[x,y],ngb:neighbours});
+        id++;
     }
     visualise(steps);
 }
@@ -208,16 +211,45 @@ function includesCoord(x,y, array){
 }
 
 function visualise(steps){
-    for(let i=0; i < steps.length;i++){
+    let done = false;
+    let i;
+    steps.forEach(function(step){
+        i = step.id;
+        console.log(i)
+       // console.log(step)
         setTimeout(function () {
-            for(let j=0; j < steps[i].length; j++){
-                let x = steps[i][j][0];
-                let y = steps[i][j][1];
-                document.querySelector('#mxbox-'+x+'-'+y).style.backgroundColor = '#F8DE7E';
+            for(let j=0; j < step.ngb.length; j++){
+                let x = step.ngb[j][0];
+                let y = step.ngb[j][1];
+                //console.log(x+" "+y);
+                document.querySelector('#mxbox-'+x+'-'+y).style.backgroundColor = '#C6F2C4';
                 setTimeout(function () {
-                    document.querySelector('#mxbox-'+x+'-'+y).style.backgroundColor = '#4D8C57';
+                    document.querySelector('#mxbox-'+x+'-'+y).style.backgroundColor = '#A3D98B';
                 }, 20 * i);
             }
         }, 30 * i);
-    }
+       console.log(step)
+        done = true;
+    });
+    let goal = steps[steps.length-1].ngb[0];
+    console.log("goal "+goal);
+        while(true){
+        if(done){
+            i++;
+            goal = steps.find(e => e.ngb.find(f => f[0] === goal[0] && f[1] === goal[1]));
+            if(!goal) break;
+            console.log(goal)
+            goal = goal.parent
+            let x = goal[0];
+            let y = goal[1];
+            setTimeout(function () {
+                document.querySelector('#mxbox-'+x+'-'+y).style.backgroundColor = 'yellow';
+                setTimeout(function () {
+                    document.querySelector('#mxbox-'+x+'-'+y).style.backgroundColor = 'red';
+                }, 50 * i);
+            }, 60 * i);
+        }
+
+        }
 }
+//todo code cleanup, bug fixes and adaptations of astar and dfs

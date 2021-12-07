@@ -29,8 +29,8 @@ Array.from(dimension).forEach(function (element){
                 <option value="binary">Binary</option>`;
         }else if(dimensionVal == 2){
             dropdown.innerHTML = `
-                <option value="dfs">DFS</option>
                 <option value="bfs">BFS</option>
+                <option value="dfs">DFS</option>
                 <option value="astar">A*</option>`;
         }
         if(arraySizeValue){
