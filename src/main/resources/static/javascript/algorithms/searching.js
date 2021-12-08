@@ -90,13 +90,12 @@ function bfs(start, goal, m){
     let steps = [];
     let matrix = [...m];
     let frontier = [];
-    frontier.push(start);
     let id = 0;
+    frontier.push(start);
     while(frontier.length > 0){
         let neighbours = [];
         let node = frontier.shift();
-        let x = node[0];
-        let y = node[1];
+        let x = node[0], y = node[1];
         if (matrix[x][y] === 2){
             break;
         }
@@ -129,6 +128,7 @@ function dfs(start,goal,m){
     let steps = [];
     let matrix = [...m];
     let frontier = [];
+    let id = 0;
     frontier.push(start);
     while(frontier.length > 0){
         let neighbours = [];
@@ -154,7 +154,8 @@ function dfs(start,goal,m){
                 }
             }
         }
-        steps.push(neighbours);
+        steps.push({id,parent:[x,y],ngb:neighbours});
+        id++;
     }
     visualise(steps);
 }
@@ -164,6 +165,7 @@ function astar(start, goal, m){
     let steps = [];
     let matrix = [...m];
     let frontier = [];
+    let id = 0;
     frontier.push(start);
     while(frontier.length > 0){
         let node = frontier.shift();
@@ -194,7 +196,8 @@ function astar(start, goal, m){
             let min = [estimations[0].x,estimations[0].y];
             matrix[estimations[0].x][estimations[0].y] = -2;
             frontier.push(min);
-            steps.push([min]);
+            steps.push({id,parent:[x,y],ngb:[min]});
+            id++;
         }
     }
     visualise(steps);
@@ -216,40 +219,34 @@ function visualise(steps){
     steps.forEach(function(step){
         i = step.id;
         console.log(i)
-       // console.log(step)
         setTimeout(function () {
             for(let j=0; j < step.ngb.length; j++){
                 let x = step.ngb[j][0];
                 let y = step.ngb[j][1];
-                //console.log(x+" "+y);
-                document.querySelector('#mxbox-'+x+'-'+y).style.backgroundColor = '#C6F2C4';
+                document.querySelector('#mxbox-'+x+'-'+y).style.backgroundColor = '#77CED1';
                 setTimeout(function () {
-                    document.querySelector('#mxbox-'+x+'-'+y).style.backgroundColor = '#A3D98B';
-                }, 20 * i);
+                    document.querySelector('#mxbox-'+x+'-'+y).style.backgroundColor = '#3DD9BC';
+                }, 5 * i);
             }
         }, 30 * i);
-       console.log(step)
         done = true;
     });
+    vizPath(i, steps)
+}
+
+function vizPath(i, steps){
     let goal = steps[steps.length-1].ngb[0];
-    console.log("goal "+goal);
-        while(true){
-        if(done){
+    while(true){
             i++;
             goal = steps.find(e => e.ngb.find(f => f[0] === goal[0] && f[1] === goal[1]));
             if(!goal) break;
-            console.log(goal)
             goal = goal.parent
-            let x = goal[0];
-            let y = goal[1];
+            let x = goal[0], y = goal[1];
             setTimeout(function () {
-                document.querySelector('#mxbox-'+x+'-'+y).style.backgroundColor = 'yellow';
+                document.querySelector('#mxbox-'+x+'-'+y).style.backgroundColor = '#EDB34E';
                 setTimeout(function () {
-                    document.querySelector('#mxbox-'+x+'-'+y).style.backgroundColor = 'red';
-                }, 50 * i);
-            }, 60 * i);
-        }
-
-        }
+                    document.querySelector('#mxbox-'+x+'-'+y).style.backgroundColor = '#E86C54';
+                }, 10 * i);
+            }, 60 * i)
+    }
 }
-//todo code cleanup, bug fixes and adaptations of astar and dfs
