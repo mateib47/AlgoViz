@@ -38,7 +38,7 @@ function mergeSort(length){
     let array = initArray(length);
     mergeSorting(array);
     for(let i=0;i<displayArray.length;i++){
-        mergeTask(displayArray[i], i);
+        sortViz(displayArray[i], i);
     }
 }
 function mergeSorting(array){
@@ -78,7 +78,7 @@ function updateDisplay(result){
     displayArray.push(arr);
 }
 
-function mergeTask(array, m) {
+function sortViz(array, m) {
    setTimeout(function() {
         for(let e of array){
             document.querySelector('#bar-'+e[0]).style.maxHeight = e[1];
@@ -88,9 +88,9 @@ function mergeTask(array, m) {
 
 function quickSort(length){
     let array = initArray(length);
-    console.log(quickSorting(array));
+    quickSorting(array);
     for(let i=0;i<displayArray.length;i++){
-        mergeTask(displayArray[i], i); //rename this
+        sortViz(displayArray[i], i);
     }
 }
 function quickSorting(array){
@@ -111,9 +111,35 @@ function delay(i) {
 
     }, 300 * i);
 }
-function heapSort(){
+function heapSort(length, arrayValues){
+    for(let i = Math.floor(length/2);i>=0;i--){
+        heapRoot(arrayValues, i);
+    }
+}
+
+function heapRoot(i, array, length){
+    let left = 2 * i + 1;
+    let right = 2 * i + 2;
+    let max = i;
+    if(left < length && array[left] > array[max]){
+        max = left;
+    }
+    if(right < length && array[right] > array[max]){
+        max = right;
+    }
+    if(max !== i){
+        swap(array, i, max);
+        heapRoot(array, max, length)
+    }
 
 }
+function swap(input, a, b){
+    let temp = input[a];
+    input[a] = input[b];
+    input[b] = temp;
+}
+
+
 function sortingDone(){
     alert('Done');
 }

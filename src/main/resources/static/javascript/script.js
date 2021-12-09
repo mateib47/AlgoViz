@@ -194,7 +194,7 @@ Array.from(searchingForm).forEach(function (element) {
                     binarySearch(goal, length);
                     break;
                 case 'heap':
-                    heapSort(length);
+                    heapSort(length, arrayValues);
                     break;
                 case 'quick':
                     quickSort(length);
