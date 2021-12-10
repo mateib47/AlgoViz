@@ -111,13 +111,22 @@ function delay(i) {
 
     }, 300 * i);
 }
-function heapSort(length, arrayValues){
+let length;
+function heapSort(arrayValues){
+    console.log(arrayValues)
+    length = arrayValues.length;
     for(let i = Math.floor(length/2);i>=0;i--){
-        heapRoot(arrayValues, i);
+        heapRoot(i, arrayValues);
     }
+    for (let i = length - 1; i > 0; i--) {
+        swap(arrayValues, 0, i);
+        length--;
+        heapRoot(0, arrayValues);
+    }
+    console.log(arrayValues)
 }
 
-function heapRoot(i, array, length){
+function heapRoot(i, array){
     let left = 2 * i + 1;
     let right = 2 * i + 2;
     let max = i;
@@ -129,9 +138,8 @@ function heapRoot(i, array, length){
     }
     if(max !== i){
         swap(array, i, max);
-        heapRoot(array, max, length)
+        heapRoot(max, array)
     }
-
 }
 function swap(input, a, b){
     let temp = input[a];
