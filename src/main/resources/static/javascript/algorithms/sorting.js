@@ -97,13 +97,13 @@ function quickSorting(array){
     if (array.length <= 1) {
         return array;
     }
-    const pivot = array[0].value;
+    const pivot = array[0];
     let left = [], right = [];
     for(let i=1;i<array.length;i++){
-        array[i].value < pivot ? left.push(array[i]) : right.push(array[i]);
+        array[i].value < pivot.value ? left.push(array[i]) : right.push(array[i]);
     }
- //   updateDisplay(left);
-  //  updateDisplay(right); adapt for quicksort
+    const result = [...left,pivot, ...right];
+    updateDisplay(result);
     return quickSorting(left).concat(pivot, quickSorting(right));
 }
 function delay(i) {
