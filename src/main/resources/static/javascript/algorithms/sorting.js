@@ -111,29 +111,33 @@ function delay(i) {
 
     }, 300 * i);
 }
-let length;
-function heapSort(arrayValues){
-    console.log(arrayValues)
-    length = arrayValues.length;
-    for(let i = Math.floor(length/2);i>=0;i--){
-        heapRoot(i, arrayValues);
+let heapLength;
+function heapSort(length){
+    heapLength = length;
+    let array = initArray(heapLength);
+    for(let i = Math.floor(heapLength/2);i>=0;i--){
+        heapRoot(i, array);
     }
-    for (let i = length - 1; i > 0; i--) {
-        swap(arrayValues, 0, i);
-        length--;
-        heapRoot(0, arrayValues);
+    for (let i = heapLength - 1; i > 0; i--) {
+        swap(array, 0, i);
+        heapLength--;
+        heapRoot(0, array);
+        updateDisplay(array)
     }
-    console.log(arrayValues)
+    for(let i=0;i<displayArray.length;i++){
+        sortViz(displayArray[i], i);
+    }
+    console.log(array)
 }
 
 function heapRoot(i, array){
     let left = 2 * i + 1;
     let right = 2 * i + 2;
     let max = i;
-    if(left < length && array[left] > array[max]){
+    if(left < heapLength && array[left].value > array[max].value){
         max = left;
     }
-    if(right < length && array[right] > array[max]){
+    if(right < heapLength && array[right].value > array[max].value){
         max = right;
     }
     if(max !== i){

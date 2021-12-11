@@ -194,13 +194,13 @@ Array.from(searchingForm).forEach(function (element) {
                     binarySearch(goal, length);
                     break;
                 case 'heap':
-                    heapSort(arrayValues);
+                    heapSort(length);
                     break;
                 case 'quick':
                     quickSort(length);
                     break;
                 case 'merge':
-                    mergeSort(length, arrayValues);
+                    mergeSort(length);
                     break;
                 case 'bubble':
                     bubbleSort(length);
