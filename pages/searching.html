@@ -58,7 +58,7 @@ function sequentialSearch(toFind, length){
     }
 }
       </code></pre>
-        <p class="italic">The time complexity of Linear Search in the best case is O(1). In the worst case, the time complexity is <b>O(n)</b>.</p>
+        <p class="italic">The time complexity of Linear Search in the best case is <b>O(1)</b>. In the worst case, the time complexity is <b>O(n)</b>.</p>
     </div>
     <div>
       <h1>Binary Search</h1>
@@ -85,7 +85,7 @@ function binarySearch(toFind, length){
     }
 }
       </code></pre>
-        <p class="italic">The time complexity of Binary Search in the best case is O(1). In the worst case, the time complexity is <b>O(log n)</b>.</p>
+        <p class="italic">The time complexity of Binary Search in the best case is <b>O(1)</b>. In the worst case, the time complexity is <b>O(log n)</b>.</p>
     </div>
       <div class="description">
           <h1>Breadth-first search (BFS)</h1>
@@ -164,6 +164,22 @@ function dfs(start,m){
           <p class="italic">DFS is typically used to traverse an entire graph, and takes time <b>O(|V| + |E|)</b>,
               where |V| is the number of vertices and |E| the number of edges. It also uses space <b>O(|V|)</b> in the worst
               case to store the stack of vertices on the current search path as well as the set of already-visited vertices. </p>
+      </div>
+      <div class="description">
+          <h1>A* (A-star)</h1>
+          <p>A* is a graph traversal and path search algorithm, which is often used in many fields of computer science
+              due to its completeness, optimality, and optimal efficiency. In practical travel-routing systems, it is
+              generally outperformed by algorithms which can pre-process the graph to attain better performance,
+              as well as memory-bounded approaches; however, A* is still the best solution in many cases.
+              A* was created as part of the Shakey project, which had the aim of building a mobile robot that could plan its own actions. </p>
+          <pre><code>
+
+          </code></pre>
+          <p class="italic">The time complexity is polynomial when the search space is a tree, there is a single goal state,
+              and the heuristic function h meets the following condition: |h(x) - h^*(x)| = <b>O(log h*(x))</b>
+              where h* is the optimal heuristic, the exact cost to get from x to the goal.
+              The space complexity of A* is <b>O(b^d)</b> where b is the branching factor and d is the depth of the solution .
+              It is roughly the same as that of all other graph search algorithms, as it keeps all generated nodes in memory.</p>
       </div>
   </section>
 </main>

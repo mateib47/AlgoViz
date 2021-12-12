@@ -29,10 +29,10 @@
             </select>
             <button>Let's sort!</button>
         </form>
+        <a href="#sorting-descriptions">&#8595;  Find out more about the algorithms  &#8595;</a>
         <p id="prompt">The element was found!</p>
         <div id="array-sorting" class="array row"></div>
         <br>
-        <a href="#sorting-descriptions">&#8595;  Find out more about the algorithms  &#8595;</a>
     </section>
     <section id="sorting-descriptions" class="full-screen-no-height">
         <div class="description">
@@ -134,6 +134,53 @@ function merge(left, right) {
 }
         </code></pre>
         <p class="italic">The average and best-case time complexity for quicksort(simple partition) is <b>O(n log(n))</b>. The worst-case performance is <b>O(n^2)</b>.</p>
+    </div>
+    <div class="description">
+        <h1>Heap Sort</h1>
+        <p>Heapsort is a comparison-based sorting algorithm. It can be
+            thought of as an improved selection sort: like selection sort,
+            heapsort divides its input into a sorted and an unsorted region,
+            and it iteratively shrinks the unsorted region by extracting the
+            largest element from it and inserting it into the sorted region.
+            Heap sort maintains the unsorted region in a heap data structure to more quickly find the largest element in each step.</p>
+        <pre><code>
+let heapLength;
+function heapSort(length){
+    heapLength = length;
+    let array = initArray(heapLength);
+    for(let i = Math.floor(heapLength/2);i>=0;i--){
+        heapRoot(i, array);
+    }
+    for (let i = heapLength - 1; i > 0; i--) {
+        swap(array, 0, i);
+        heapLength--;
+        heapRoot(0, array);
+    }
+}
+
+function heapRoot(i, array){
+    let left = 2 * i + 1;
+    let right = 2 * i + 2;
+    let max = i;
+    if(left < heapLength && array[left].value > array[max].value){
+        max = left;
+    }
+    if(right < heapLength && array[right].value > array[max].value){
+        max = right;
+    }
+    if(max !== i){
+        swap(array, i, max);
+        heapRoot(max, array)
+    }
+}
+
+function swap(input, a, b){
+    let temp = input[a];
+    input[a] = input[b];
+    input[b] = temp;
+}
+        </code></pre>
+        <p class="italic">Time complexity of Heap Sort is <b>O(n*Log n)</b> in all the 3 cases (worst, average and best)</p>
     </div>
 </main>
 <footer>

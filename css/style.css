@@ -10,6 +10,40 @@ body{
 fieldset{
     border:none;
 }
+.card {
+    height: 70%;
+    position: relative;
+    padding: 20px;
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    text-decoration: none;
+    box-shadow: rgba(50, 50, 93, 0.25) 0px 50px 100px -20px, rgba(0, 0, 0, 0.3) 0px 30px 60px -30px;
+    margin-bottom: 20px;
+    background-image: url("../images/img-bck.png");
+    background-size: cover;
+}
+
+.inner {
+    width: 50%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    background: #0F6A8B;
+    box-sizing: border-box;
+    padding: 40px;
+    height: 80%;
+    max-height: 100%;
+    margin-right: 20%;
+}
+.centered {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
 .row{
     display:flex;
     flex-direction:row;
@@ -30,6 +64,7 @@ nav {
     justify-content: space-between;
     align-items: center;
     padding:20px;
+    z-index: 2;
 }
 a {
     color: #FFF;
@@ -80,7 +115,7 @@ main{
 p, h1, label{
     color: #FFFFFF;
 }
-button{
+button, .button{
     color: #F2ECD8;
     background-color: #436E73;
     border: none;
@@ -89,6 +124,9 @@ button{
     font-size: 15px;
     cursor: pointer;
     margin:20px;
+}
+.big{
+    transform: scale(1.5, 1.5);
 }
 .box, .mx-box{
     background-color: #FFFFFF;
@@ -155,9 +193,9 @@ footer{
     text-align: center;
     margin: auto;
 }
-#welcome{
-    margin: 0 20%;
-}
 .italic{
     font-style: italic;
+}
+#welcome{
+    margin: 0 10%;
 }
