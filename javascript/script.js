@@ -88,7 +88,7 @@ function generateSearchingArray(){
     eraseArray();
     let arrayHtml = '';
     const array = document.querySelector('#array-searching');
-    if(dimensionVal === 1){
+    if(dimensionVal == 1){
         goal = Math.floor(Math.random() * arraySizeValue)
         arrayHtml += '<div class="row">';
         for(let i=0; i<arraySizeValue;i++){
@@ -151,6 +151,7 @@ function shuffle(array){
 }
 
 function eraseArray(){
+    document.getElementById('prompt').style.display = 'none';
     const array = document.querySelector('.array');
     array.innerHTML = '';
     const prompts = document.getElementsByClassName('prompt');
@@ -185,6 +186,7 @@ Array.from(searchingForm).forEach(function (element) {
         const algTypeInput = event.target.getElementsByClassName('alg-input')[0];
         const  length = lengthInput.value.trim();
         const algType = algTypeInput.value;
+        displayArray = [];
         if(algType !== '' && length !== ''){
             switch (algType){
                 case 'sequential':

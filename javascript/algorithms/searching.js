@@ -2,7 +2,7 @@ let directions = [[-1,0],[0,1],[1,0],[0,-1]];
 
 function sequentialSearch(toFind, length){
     for(let i = 0; i<length; i++){
-        if(i == toFind){
+        if(i === toFind){
             elementFound(toFind);
             break;
         }else{
@@ -17,14 +17,9 @@ function task(i) {
     }, 300 * i);
 }
 
-function green(i, d) {
+function changeColor(i, d,color) {
     setTimeout(function() {
-        document.querySelector('#box-'+i).style.backgroundColor = '#F2EB8D';
-    }, 300*d);
-}
-function red(i, d) {
-    setTimeout(function() {
-        document.querySelector('#box-'+i).style.backgroundColor = '#F2B05E';
+        document.querySelector('#box-'+i).style.backgroundColor = color;
     }, 300*d);
 
 }
@@ -35,13 +30,13 @@ function binarySearch(toFind, length){//make it recursive
         depth+=4;
         for(let j = 0;j<length;j++){
             if(j >= l && j<=r && j!=toFind){
-                green(j, depth)
-            }else if(j!=toFind){
-                red(j, depth);
+                changeColor(j, depth, '#3DD9BC')
+            }else if(j!==toFind){
+                changeColor(j, depth, '#E86C54')
             }
         }
         let m = Math.round((l+r)/2);
-        if(m == toFind){
+        if(m === toFind){
             elementFound(toFind, depth);
             break;
         }else if(toFind < m){
@@ -51,9 +46,10 @@ function binarySearch(toFind, length){//make it recursive
         }
     }
 }
+
 function fadeOut(element) {
-    var op = 1;
-    var timer = setInterval(function () {
+    let op = 1;
+    let timer = setInterval(function () {
         if (op <= 0.3){
             clearInterval(timer);
         }
@@ -61,19 +57,6 @@ function fadeOut(element) {
         element.style.filter = 'alpha(opacity=' + op * 100 + ")";
         op -= op * 0.1;
     }, 50);
-}
-
-function fadeIn(element) {
-    var op = 0.1;  // initial opacity
-    element.style.display = 'block';
-    var timer = setInterval(function () {
-        if (op >= 1){
-            clearInterval(timer);
-        }
-        element.style.opacity = op;
-        element.style.filter = 'alpha(opacity=' + op * 100 + ")";
-        op += op * 0.1;
-    }, 10);
 }
 
 function elementFound(found, depth){
@@ -206,7 +189,6 @@ function astar(start, goal, m){
 
 function includesCoord(x,y, array){
     for(let e of array){
-        console.log(e+" "+x+" "+y);
         if(x === e[0] && y === e[1])
             return true;
     }
@@ -218,7 +200,6 @@ function visualise(steps){
     let i;
     steps.forEach(function(step){
         i = step.id;
-        console.log(i)
         setTimeout(function () {
             for(let j=0; j < step.ngb.length; j++){
                 let x = step.ngb[j][0];
